@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import ImageCard from "./components/ImageCard";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ImageCardMobile from "./components/ImageCardMobile";
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
           element={
             <div className="m-6">
               <ImageCard />
-              <ImageCardMobile />
             </div>
           }
         />
