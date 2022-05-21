@@ -16,7 +16,8 @@ const ImageCard = ({
         className={`${
           objPropCover ? "object-cover" : "object-contain"
         } md:object-cover w-full h-full mx-auto rounded-md md:w-auto bg-gradient-to-br md:mx-0 from-slate-300 to-slate-200`}
-        src={window.innerWidth < 700 ? el.urls.small : el.urls.regular}
+        src={el.urls.regular}
+        srcSet={`${el.urls.small} 1x, ${el.urls.regular} 2x, ${el.urls.full} 3x`}
         alt={el.description}
       />
     </div>
