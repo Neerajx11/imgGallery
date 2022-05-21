@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import DummyImgGroup from "./DummyImgGroup";
+import ImageCard from "./ImageCard";
 
 const GET_RANDOM_URL = "https://api.unsplash.com/photos/random";
 
@@ -33,16 +34,7 @@ const ImageGallery = () => {
   }, []);
 
   // render all the images
-  const list = imgs?.map((el, idx) => {
-    return (
-      <img
-        key={el.id}
-        className="h-[400px] relative min-w-max object-cover rounded-md my-6 snap-left bg-slate-300"
-        src={window.innerWidth < 700 ? el.urls.small : el.urls.regular}
-        alt={el.description}
-      />
-    );
-  });
+  const list = imgs?.map((el) => <ImageCard el={el} num={34} key={el.id} />);
 
   // ref for carousel
   const ctr = useRef(null);
@@ -75,10 +67,19 @@ const ImageGallery = () => {
 
   // control handlers
   const prevHandler = () => {
+    if (!imgs.length) return;
     ctr.current.scrollTo(foundNearestLower(), 0);
   };
   const nextHandler = () => {
+    if (!imgs.length) return;
     ctr.current.scrollTo(foundNearestGreater(), 0);
+  };
+
+  const prevMobileHandler = () => {
+    ctr.current.scrollTo(ctr.current.scrollLeft - ctr.current.clientWidth, 0);
+  };
+  const nextMobileHandler = () => {
+    ctr.current.scrollTo(ctr.current.scrollLeft + ctr.current.clientWidth, 0);
   };
 
   return (
@@ -89,22 +90,38 @@ const ImageGallery = () => {
       </div>
       <div
         ref={ctr}
-        className="flex gap-6 px-6 overflow-x-scroll scrollbar-hide scroll-smooth"
+        className="flex gap-6 px-4 md:px-6 overflow-x-scroll scrollbar-hide scroll-smooth min-h-[400px] md:snap-none snap-x"
       >
-        {list}
+        {imgs.length ? list : <DummyImgGroup />}
       </div>
-      <div className="flex justify-center gap-6 mt-8">
-        <span
+      {/* Controls */}
+      <div className="justify-center hidden gap-6 mt-8 md:flex">
+        <button
           onClick={prevHandler}
+          disabled={!imgs.length}
           className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
-        >{`<`}</span>
-        <span
+        >{`<`}</button>
+        <button
           onClick={nextHandler}
+          disabled={!imgs.length}
           className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
-        >{`>`}</span>
+        >{`>`}</button>
       </div>
 
       {/* MOBILE */}
+      {/* Controls */}
+      <div className="flex justify-center gap-6 mt-8 md:hidden">
+        <button
+          onClick={prevMobileHandler}
+          disabled={!imgs.length}
+          className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
+        >{`<`}</button>
+        <button
+          onClick={nextMobileHandler}
+          disabled={!imgs.length}
+          className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
+        >{`>`}</button>
+      </div>
     </div>
   );
 };

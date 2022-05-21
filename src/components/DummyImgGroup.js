@@ -1,14 +1,18 @@
 import React from "react";
 import DummyImgCard from "./DummyImgCard";
 
+import { v4 } from "uuid";
+
 const DummyImgGroup = () => {
+  const list = [];
+  list.length = 8;
+  list.fill(0, 0, 8);
   return (
-    <div className="flex flex-wrap gap-4">
-      <DummyImgCard />
-      <DummyImgCard />
-      <DummyImgCard />
-      <DummyImgCard />
-    </div>
+    <>
+      {list.map((el) => (
+        <DummyImgCard key={v4()} />
+      ))}
+    </>
   );
 };
 
