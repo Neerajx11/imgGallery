@@ -15,7 +15,7 @@ const ImageCard = ({
         onClick={toggleObjPropCover}
         className={`${
           objPropCover ? "object-cover" : "object-contain"
-        } w-full h-full mx-auto rounded-md md:w-auto bg-gradient-to-br md:mx-0 from-slate-300 to-slate-200`}
+        } md:object-cover w-full h-full mx-auto rounded-md md:w-auto bg-gradient-to-br md:mx-0 from-slate-300 to-slate-200`}
         src={window.innerWidth < 700 ? el.urls.small : el.urls.regular}
         alt={el.description}
       />
