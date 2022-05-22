@@ -32,7 +32,7 @@ const ImageCard = ({
   };
 
   return (
-    <div className="h-[400px] relative min-w-full md:min-w-max rounded-md  my-6 overflow-hidden snap-center  md:snap-none">
+    <div className="h-[400px] relative min-w-full md:min-w-max md:my-6 rounded-md overflow-hidden snap-center md:snap-none">
       <img
         className={`object-contain hover:scale-105 duration-200 ease-linear w-full h-full mx-auto rounded-md md:w-auto md:mx-0`}
         style={{ background: `${el.color ?? "rgb(209 213 219)"}` }}

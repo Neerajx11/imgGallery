@@ -5,14 +5,14 @@ import { v4 } from "uuid";
 
 const DummyImgGroup = () => {
   const list = [];
-  list.length = 4;
-  list.fill(0, 0, 4);
+  list.length = 8;
+  list.fill(0, 0, 8);
   return (
-    <>
+    <div className="flex gap-4 mx-4 md:mx-0">
       {list.map((el) => (
         <DummyImgCard key={v4()} />
       ))}
-    </>
+    </div>
   );
 };
 

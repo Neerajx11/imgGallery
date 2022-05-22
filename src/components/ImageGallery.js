@@ -1,10 +1,19 @@
 import { useEffect, useRef, useState } from "react";
+
 import DummyImgGroup from "./DummyImgGroup";
 import ImageCard from "./ImageCard";
-import { SearchIcon } from "@heroicons/react/outline";
-import getPhotosApi from "../utils/getPhotosApi";
+import Logo from "../assets/logo.svg";
 
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LightningBoltIcon,
+  SearchIcon,
+} from "@heroicons/react/outline";
 import styles from "./Scrollbar.module.css";
+
+import getPhotosApi from "../utils/getPhotosApi";
+import { Link } from "react-router-dom";
 
 const GET_RANDOM = "photos/random";
 const GET_BY_SEARCH = "search/photos";
@@ -38,20 +47,18 @@ const ImageGallery = () => {
   // Finding width of each image
   useEffect(() => {
     setWArr(imgs.map((el) => Math.ceil((el.width / el.height) * 400) + 24));
-    console.log("calculating width");
   }, [imgs]);
 
   // initally fetch the images
   useEffect(() => {
-    getRandomImages();
+    // getRandomImages();
     if (ctr.current) {
-      console.log("scrolling");
       ctr.current.scrollTo(0, 0);
     }
   }, []);
 
   // render all the images
-  const list = imgs?.map((el) => <ImageCard el={el} num={34} key={el.id} />);
+  const list = imgs?.map((el) => <ImageCard el={el} key={el.id} />);
 
   // for finding next elemet
   const foundNearestGreater = () => {
@@ -100,26 +107,37 @@ const ImageGallery = () => {
 
   return (
     <div>
-      <div className="flex justify-between mx-8 text-3xl my-14">
-        <span>Gallery</span>
+      <div className="flex justify-between px-8 py-4 mb-2 text-xl font-bold text-white bg-purple-600">
+        <Link to="/" className="flex items-center">
+          <img className="w-6 mr-3" src={Logo} alt="logo" />
+          <span className="hidden md:block">ImgGallery</span>
+        </Link>
         <div className="flex items-center cursor-pointer">
           <input
             type="text"
             value={inp}
             placeholder="Search Images..."
-            className="border-2 border-gray-300 rounded-lg placeholder:text-lg"
+            className="px-4 py-2 text-base text-purple-600 rounded-lg placeholder:text-purple-400 placeholder:text-base focus:outline-none"
             onChange={(e) => setInp(e.target.value)}
           />
           <SearchIcon
-            className="w-8 h-8 text-gray-400"
+            className="w-10 h-10 p-2 -mx-2 text-purple-600 bg-white rounded-tr-lg rounded-br-lg"
             onClick={getSearchedImages}
           />
         </div>
-        <button onClick={() => getRandomImages("random")}>Shuffle</button>
+      </div>
+      <div className="flex justify-center my-2 mr-2 md:justify-end">
+        <button
+          className="flex items-center px-6 mx-2 my-6 font-semibold tracking-wide text-white duration-200 ease-linear bg-purple-600 border-2 border-purple-600 rounded-lg cursor-pointer disabled:opacity-80 disabled:hover:text-white disabled:cursor-not-allowed disabled:bg-slate-500 disabled:border-gray-600 hover:bg-white hover:text-purple-600"
+          onClick={() => getRandomImages("random")}
+        >
+          Shuffle
+          <LightningBoltIcon className="w-10 h-10 p-2" />
+        </button>
       </div>
       <div
         ref={ctr}
-        className={`flex gap-6 mx-4 bg-[#eee] rounded-md md:px-6 overflow-x-scroll scroll-smooth min-h-[400px] md:snap-none snap-x ${styles.scrollbar}`}
+        className={`flex gap-6 mx-4 bg-[#eee] rounded-md md:px-6 overflow-x-scroll scroll-smooth min-h-[400px] scrollbar-hide md:scrollbar-default md:snap-none snap-x ${styles.scrollbar}`}
       >
         {imgs.length ? list : <DummyImgGroup />}
       </div>
@@ -128,13 +146,17 @@ const ImageGallery = () => {
         <button
           onClick={prevHandler}
           disabled={!imgs.length}
-          className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
-        >{`<`}</button>
+          className="mx-2 my-4 text-white duration-200 ease-linear bg-purple-600 border-2 border-purple-600 rounded-lg cursor-pointer disabled:opacity-80 disabled:hover:text-white disabled:cursor-not-allowed disabled:bg-slate-500 disabled:border-gray-600 hover:bg-white hover:text-purple-600"
+        >
+          <ChevronLeftIcon className="w-10 h-10 p-2" />
+        </button>
         <button
           onClick={nextHandler}
           disabled={!imgs.length}
-          className="px-6 py-4 text-lg font-bold duration-200 bg-gray-200 cursor-pointer hover:bg-slate-500 linear hover:text-white"
-        >{`>`}</button>
+          className="mx-2 my-4 text-white duration-200 ease-linear bg-purple-600 border-2 border-purple-600 rounded-lg cursor-pointer disabled:opacity-80 disabled:hover:text-white disabled:cursor-not-allowed disabled:bg-slate-500 disabled:border-gray-600 hover:bg-white hover:text-purple-600"
+        >
+          <ChevronRightIcon className="w-10 h-10 p-2" />
+        </button>
       </div>
     </div>
   );

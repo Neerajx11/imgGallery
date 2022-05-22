@@ -6,10 +6,13 @@
 
 .scrollbar::-webkit-scrollbar-track {
   border-radius: 100vh;
-  background: rgb(214, 214, 214);
+  background: rgb(201, 201, 201);
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: rgb(227, 227, 227);
+  background: rgb(225, 225, 225);
   border-radius: 20px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  cursor: pointer;
 }
