@@ -5,8 +5,8 @@ import { v4 } from "uuid";
 
 const DummyImgGroup = () => {
   const list = [];
-  list.length = 8;
-  list.fill(0, 0, 8);
+  list.length = 4;
+  list.fill(0, 0, 4);
   return (
     <>
       {list.map((el) => (
