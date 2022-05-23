@@ -1,32 +1,9 @@
-import { useState } from "react";
 import { DownloadIcon } from "@heroicons/react/outline";
 import { HeartIcon } from "@heroicons/react/solid";
 import { saveAs } from "file-saver";
+import { sampleImageData } from "../../assets/data";
 
-const URL =
-  "https://images.unsplash.com/photo-1650573038286-250fa8e1b49e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNzkzOTh8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTMxMTYyNjU&ixlib=rb-1.2.1&q=80&w=1080";
-
-const ImageCard = ({
-  el = {
-    description: null,
-    alt_description: "Hello",
-    color: "#26260c",
-    urls: {
-      small: URL,
-      regular: URL,
-      full: URL,
-    },
-    user: {
-      username: "elisamoldovan",
-      total_likes: 66,
-      name: "Elisa Photography",
-      profile_image: {
-        medium:
-          "https://images.unsplash.com/profile-1653128357527-993574d7fb9eimage?ixlib=rb-1.2.1&crop=faces&fit=crop&w=64&h=64",
-      },
-    },
-  },
-}) => {
+const ImageCard = ({ el = sampleImageData }) => {
   const onDownload = () => {
     saveAs(el.urls.full, `${el.alt_description ?? el.description ?? "image"}`);
   };

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-import DummyImgGroup from "./DummyImgGroup";
+import DummyGroup from "../DummyGroup";
 import ImageCard from "./ImageCard";
-import Logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
 
 import {
   ChevronLeftIcon,
@@ -10,9 +10,9 @@ import {
   LightningBoltIcon,
   SearchIcon,
 } from "@heroicons/react/outline";
-import styles from "./Scrollbar.module.css";
+import styles from "../Scrollbar.module.css";
 
-import getPhotosApi from "../utils/getPhotosApi";
+import getPhotosApi from "../../utils/getPhotosApi";
 import { Link } from "react-router-dom";
 
 const GET_RANDOM = "photos/random";
@@ -37,6 +37,7 @@ const ImageGallery = () => {
 
   // req to get searched images
   const getSearchedImages = async () => {
+    if (inp === "") return;
     const res = await getPhotosApi(GET_BY_SEARCH, {
       params: { query: inp, per_page: 30 },
     });
@@ -117,7 +118,7 @@ const ImageGallery = () => {
             type="text"
             value={inp}
             placeholder="Search Images..."
-            className="px-4 py-2 text-base text-purple-600 rounded-lg placeholder:text-purple-400 placeholder:text-base focus:outline-none"
+            className="px-4 py-2 text-base text-purple-600 rounded-lg placeholder:text-purple-600 placeholder:text-base focus:outline-none"
             onChange={(e) => setInp(e.target.value)}
           />
           <SearchIcon
@@ -139,7 +140,7 @@ const ImageGallery = () => {
         ref={ctr}
         className={`flex gap-6 mx-4 bg-[#eee] rounded-md md:px-6 overflow-x-scroll scroll-smooth min-h-[400px] scrollbar-hide md:scrollbar-default md:snap-none snap-x ${styles.scrollbar}`}
       >
-        {imgs.length ? list : <DummyImgGroup />}
+        {imgs.length ? list : <DummyGroup />}
       </div>
       {/* Controls */}
       <div className="flex justify-center gap-6 mt-8">
