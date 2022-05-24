@@ -13,7 +13,6 @@ import {
 import styles from "../Scrollbar.module.css";
 
 import getPhotosApi from "../../utils/getPhotosApi";
-import { Link } from "react-router-dom";
 
 const GET_RANDOM = "photos/random";
 const GET_BY_SEARCH = "search/photos";
@@ -52,7 +51,7 @@ const ImageGallery = () => {
 
   // initally fetch the images
   useEffect(() => {
-    // getRandomImages();
+    getRandomImages();
     if (ctr.current) {
       ctr.current.scrollTo(0, 0);
     }
@@ -109,10 +108,10 @@ const ImageGallery = () => {
   return (
     <div>
       <div className="flex justify-between px-8 py-4 mb-2 text-xl font-bold text-white bg-purple-600">
-        <Link to="/" className="flex items-center">
+        <div className="flex items-center">
           <img className="w-6 mr-3" src={Logo} alt="logo" />
           <span className="hidden md:block">ImgGallery</span>
-        </Link>
+        </div>
         <div className="flex items-center cursor-pointer">
           <input
             type="text"
