@@ -13,7 +13,7 @@ const ImageCard = ({ el = sampleImageData }) => {
       <img
         className={`object-contain hover:scale-105 duration-200 ease-linear w-full h-full mx-auto rounded-md md:w-auto md:mx-0`}
         style={{ background: `${el.color ?? "rgb(209 213 219)"}` }}
-        src={el.urls.regular}
+        src={window.clientWidth < 768 ? el.urls.small : el.urls.regular}
         srcSet={`${el.urls.small} 1x, ${el.urls.regular} 2x, ${el.urls.full} 3x`}
         alt={el.alt_description}
       />
