@@ -17,4 +17,4 @@ This project is hosted at [ImgGallery](https://imggallery.vercel.app/)
 ## Responsive Desgin
 
 - It has a responsive design and works on any screen size
-  <img width="350px" src="./public/website/landingmobile.png" />
+  <img src="./public/website/landingmobile.png" />
