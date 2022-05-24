@@ -35,7 +35,7 @@ const ImageGallery = () => {
   };
 
   // req to get searched images
-  const getSearchedImages = async () => {
+  const getSearchedImages = async (e) => {
     if (inp === "") return;
     const res = await getPhotosApi(GET_BY_SEARCH, {
       params: { query: inp, per_page: 30 },
@@ -43,6 +43,9 @@ const ImageGallery = () => {
     setImgs(res.data.results);
     setInp("");
   };
+
+  //on Enter
+  const enterHandler = (e) => (e.which === 13 ? getSearchedImages() : null);
 
   // Finding width of each image
   useEffect(() => {
@@ -117,6 +120,7 @@ const ImageGallery = () => {
             type="text"
             value={inp}
             placeholder="Search Images..."
+            onKeyPress={enterHandler}
             className="px-4 py-2 text-base text-purple-600 rounded-lg placeholder:text-purple-600 placeholder:text-base focus:outline-none"
             onChange={(e) => setInp(e.target.value)}
           />
